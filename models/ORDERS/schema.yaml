@@ -1,0 +1,21 @@
+
+version: 2
+
+sources:
+  - name: bigquery_source
+    schema: staging
+    tables:
+      - name: orders # same name as I wrote in the gcp big query
+
+models:
+    - name: transformed_orders # same as the .sql file here 
+      description: "Orders transformed table"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+      config: 
+        materialized: table
+        alias: orders_rpt # for more human readable business friendly name
